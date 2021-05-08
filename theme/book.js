@@ -1,6 +1,6 @@
 "use strict";
 
-hljs.registerLanguage('zscript', () => {
+hljs.registerLanguage('aeon', () => {
 	const KEYWORDS = {
 		keyword: 'abstract action alignOf auto break case class '
 			+ 'clearScope const continue default deprecated do else enum '
@@ -28,7 +28,7 @@ hljs.registerLanguage('zscript', () => {
 
 	return {
 		case_insensitive: true,
-		aliases: ['zsc', 'zc'],
+		aliases: ['angelscript'],
 		keywords: KEYWORDS,
 		contains: [
 			COMMENT_MODE,
@@ -40,8 +40,7 @@ hljs.registerLanguage('zscript', () => {
 			},
 			{
 				className: 'meta',
-				begin: /^version/,
-				end:   /\n/,
+				begin: /$action/,
 			},
 			{
 				beginKeywords: 'struct class',

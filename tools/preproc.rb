@@ -134,7 +134,7 @@ def mod_chapter_api chapter
 					links.push [$2, "#" + id]
 					<<~_end_
 					<dt id="#{id}">
-					<code class="language-zsc">
+					<code class="language-aeon">
 
 					#{$1}<a href="##{id}">#{$2}</a>#{$3}
 
