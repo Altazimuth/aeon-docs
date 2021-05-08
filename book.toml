@@ -1,0 +1,23 @@
+[book]
+title = "Aeon Docs"
+authors = ["Max Waine"]
+description = "Documentation for Aeon."
+language = "en"
+src = "md"
+
+[output.html]
+theme = "theme"
+additional-css = [
+	"css/elements.css",
+	"css/hljs.css",
+	"css/restyle.css",
+]
+no-section-label = true
+git-repository-url = "https://github.com/Altazimuth/aeon-docs"
+
+[output.html.fold]
+enable = true
+
+[preprocessor.aeon-doc]
+command = "ruby tools/preproc.rb"
+renderer = ["html"]
