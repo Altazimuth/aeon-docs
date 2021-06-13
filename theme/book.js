@@ -16,14 +16,19 @@ hljs.registerLanguage('aeon', () => {
 	};
 
 	const FUNC_TITLE_RE = hljs.UNDERSCORE_IDENT_RE + '\\s*\\(';
-	const TYPE_NAME_RE = hljs.UNDERSCORE_IDENT_RE + '(\\.'
-		+ hljs.UNDERSCORE_IDENT_RE + ')*(<[^>]*>)?';
+	const TYPE_NAME_RE = hljs.UNDERSCORE_IDENT_RE + '(<[^>]*>)?';
 	const NUMBER_MODE = hljs.C_NUMBER_MODE;
 	const STRING_MODE = {
 		variants: [hljs.APOS_STRING_MODE, hljs.QUOTE_STRING_MODE]
 	};
 	const COMMENT_MODE = {
 		variants: [hljs.C_LINE_COMMENT_MODE, hljs.C_BLOCK_COMMENT_MODE]
+	};
+	const FUNC_KW_MODE = {
+		className: 'keyword',
+		begin: /(version|deprecated)\(/,
+		end:   /\)/,
+		contains: [STRING_MODE, COMMENT_MODE],
 	};
 
 	return {
@@ -42,6 +47,7 @@ hljs.registerLanguage('aeon', () => {
 				className: 'meta',
 				begin: /$action/,
 			},
+			FUNC_KW_MODE,
 			{
 				beginKeywords: 'struct class',
 				end:           /[{;]/,
@@ -52,11 +58,7 @@ hljs.registerLanguage('aeon', () => {
 					{
 						beginKeywords: 'abstract clearScope native play replaces ui',
 					},
-					{
-						beginKeywords: 'version',
-						end:           /\)/,
-						contains: [STRING_MODE, COMMENT_MODE],
-					},
+					FUNC_KW_MODE,
 					hljs.UNDERSCORE_TITLE_MODE,
 				],
 			},
@@ -65,8 +67,7 @@ hljs.registerLanguage('aeon', () => {
 			},
 			{
 				className: 'function',
-				begin: TYPE_NAME_RE + '(\\s*,\\s*' + TYPE_NAME_RE + ')*\\s+'
-					+ FUNC_TITLE_RE,
+				begin: TYPE_NAME_RE + '\\s+' + FUNC_TITLE_RE,
 				end:   /[{;]/,
 				returnBegin: true,
 				excludeEnd:  true,

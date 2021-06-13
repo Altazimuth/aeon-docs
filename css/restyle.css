@@ -1,9 +1,16 @@
+/* fonts */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+h1, .chapter li.chapter-item {
+	font-family: Ubuntu, Consolas, serif;
+}
+
 /* basic elements */
 html {
 	overflow-y: scroll;
 }
 
-pre, :not(pre) > code {
+pre, :not(pre) > code:not(.borderless) {
 	padding: 0.2em 0.15em;
 	font-weight: 400;
 	background-color: var(--fira-secondary);
@@ -11,23 +18,51 @@ pre, :not(pre) > code {
 	border-radius: var(--border-radius);
 }
 
-span.code {
-	font-family: monospace;
-}
-
 code > p > a {
 	color: var(--fg) !important;
+}
+
+pre code a {
+	color: var(--fg) !important;
+	text-decoration: underline dotted !important;
 }
 
 .content > main > p {
 	line-height: 1.6;
 }
 
-h1 {
-	font-family: serif;
+.content h2::after,
+.content h3::after,
+.content h4::after,
+.content h5::after {
+	content: "";
+	display: inline-block;
+	border-bottom: 1px solid var(--fira-border);
+	margin-bottom: 0.5ch;
+	margin-left: 0.5em;
+}
+
+.content h2::after {
+	width: 16em;
+}
+
+.content h3::after {
+	width: 8em;
+}
+
+.content h4::after {
+	width: 4em;
+}
+
+.content h5::after {
+	width: 2em;
 }
 
 /* misc elements */
+li::marker {
+	color: var(--fira-border);
+}
+
 details {
 	border-left: 4px solid var(--fira-border);
 	padding: 0 1ch;
@@ -46,18 +81,18 @@ details summary:hover {
 
 details summary::marker,
 details summary::-webkit-details-marker {
-	content: '';
+	content: "";
 }
 
 details summary::before {
-	content: '❱';
+	content: "❱";
 	display: inline-block;
 	margin-right: 0.25em;
 	position: relative;
 	top: -0.125em;
 	transform: none;
 	transform-origin: center;
-	transition: transform 0.25s cubic-bezier(0.5, 1, 0.89, 1);
+	transition: transform 0.25s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
 details[open] summary::before {
@@ -67,25 +102,20 @@ details[open] summary::before {
 details > :not(summary) {
 	position: relative;
 	left: 2ch;
-	max-height: 0;
 	opacity: 0;
 }
 
 details:not([open]) > :not(summary) {
-	margin: 0;
-	margin-block: 0;
+	font-size: 0;
 }
 
 details[open] > :not(summary) {
 	overflow: hidden;
 	transition:
-		left         0.25s cubic-bezier(0.5, 1, 0.89, 1),
-		opacity      0.25s cubic-bezier(0.5, 1, 0.89, 1),
-		margin       0.5s  cubic-bezier(0.5, 1, 0.89, 1),
-		margin-block 0.5s  cubic-bezier(0.5, 1, 0.89, 1),
-		max-height   0.5s  cubic-bezier(0.5, 1, 0.89, 1);
+		left      0.25s cubic-bezier(0.76, 0, 0.24, 1),
+		opacity   0.25s cubic-bezier(0.76, 0, 0.24, 1),
+		font-size 0.5s  cubic-bezier(0.76, 0, 0.24, 1);
 	left: 0;
-	max-height: 5em;
 	opacity: 100%;
 }
 
@@ -186,7 +216,6 @@ ol li::before {
 /* chapter list */
 .chapter li.chapter-item {
 	margin-top: 0.6ex;
-	font-family: serif;
 }
 
 .chapter li:not(.chapter-item)::before {
@@ -199,6 +228,11 @@ ol li::before {
 
 .chapter li > a.toggle {
 	margin-left: unset;
+}
+
+.chapter li a {
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
 }
 
 .section {

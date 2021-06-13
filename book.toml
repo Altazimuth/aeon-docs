@@ -14,6 +14,7 @@ additional-css = [
 ]
 no-section-label = true
 git-repository-url = "https://github.com/Altazimuth/aeon-docs"
+site-url = "https://mwaine.com/aeon-docs/"
 
 [output.html.fold]
 enable = true
